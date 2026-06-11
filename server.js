@@ -55,7 +55,7 @@ function getCachedTx(txid) {
 }
 
 function isTH3Address(address) {
-  return typeof address === 'string' && /^T[1-9A-HJ-NP-Za-km-z]{25,40}$/.test(address);
+  return typeof address === 'string' && /^TH3[1-9A-HJ-NP-Za-km-z]{25,60}$/.test(address);
 }
 
 function isHex(value) {
