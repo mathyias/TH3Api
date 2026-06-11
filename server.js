@@ -93,6 +93,13 @@ app.get('/', (req, res) => {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TH3 API</title>
+<link rel="icon" type="image/png" href="https://th3chain.cloud/favicon.png">
+<link rel="apple-touch-icon" href="https://th3chain.cloud/apple-touch-icon.png">
+<meta property="og:title" content="TH3 API">
+<meta property="og:image" content="https://th3chain.cloud/assets/th3-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TH3 API">
+<meta name="twitter:image" content="https://th3chain.cloud/assets/th3-logo.png">
 <meta name="theme-color" content="#020617">
 <style>
 *{box-sizing:border-box}
