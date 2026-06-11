@@ -62,6 +62,205 @@ function isHex(value) {
   return typeof value === 'string' && /^[0-9a-fA-F]+$/.test(value);
 }
 
+
+// Human-readable API homepage
+app.get('/', (req, res) => {
+  let network = null;
+
+  try {
+    const height = parseInt(rpc('getblockcount'));
+    const peers = parseInt(rpc('getconnectioncount'));
+    const difficulty = parseFloat(rpc('getdifficulty'));
+    const bestblock = rpc('getbestblockhash');
+    const hashrate = parseFloat(rpc('getnetworkhashps'));
+
+    network = {
+      height,
+      peers,
+      difficulty,
+      hashrate,
+      bestblock
+    };
+  } catch (e) {
+    network = null;
+  }
+
+  const number = (value) => Number(value || 0).toLocaleString('en-US');
+
+  res.type('html').send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TH3 API</title>
+<meta name="theme-color" content="#020617">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+  color:#f8fafc;
+  background:
+    radial-gradient(circle at top left,rgba(78,234,255,.16),transparent 34rem),
+    linear-gradient(135deg,#102437,#071022 55%,#050816);
+}
+a{color:inherit}
+.wrap{
+  width:min(980px,calc(100% - 36px));
+  margin:0 auto;
+  padding:54px 0;
+}
+.hero{
+  text-align:center;
+  margin-bottom:28px;
+}
+.logo{
+  width:84px;
+  height:84px;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 24px rgba(39,232,255,.25));
+}
+.kicker{
+  margin-top:18px;
+  color:#4eeaff;
+  letter-spacing:.38em;
+  font-size:12px;
+  font-weight:900;
+}
+h1{
+  margin:14px 0 10px;
+  font-size:clamp(42px,8vw,82px);
+  line-height:.95;
+}
+.hero p{
+  margin:0 auto;
+  max-width:680px;
+  color:#9ca3af;
+  font-size:17px;
+  line-height:1.7;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.card{
+  padding:22px;
+  border-radius:22px;
+  border:1px solid rgba(148,163,184,.22);
+  background:linear-gradient(145deg,rgba(31,49,82,.94),rgba(21,31,55,.94));
+  box-shadow:0 24px 80px rgba(0,0,0,.22);
+}
+.card.full{grid-column:1/-1}
+h2{
+  margin:0 0 14px;
+  font-size:22px;
+}
+.rows{display:grid;gap:10px}
+.row{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:14px;
+  padding:12px 13px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.045);
+}
+.row span:first-child{
+  color:#9ca3af;
+  font-weight:800;
+}
+.code{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  color:#4eeaff;
+  overflow-wrap:anywhere;
+}
+.status{color:#4ade80;font-weight:900}
+.links{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  min-height:42px;
+  align-items:center;
+  justify-content:center;
+  padding:0 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.07);
+  text-decoration:none;
+  font-weight:800;
+}
+.btn-main{
+  border:0;
+  color:#03131a;
+  background:linear-gradient(180deg,#7df8ff,#27e8ff);
+}
+@media(max-width:720px){
+  .wrap{padding:32px 0}
+  .grid{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <a href="https://th3chain.cloud" aria-label="TH3Chain home">
+      <img class="logo" src="https://th3chain.cloud/assets/th3-logo.png" alt="TH3Chain">
+    </a>
+    <div class="kicker">PUBLIC API</div>
+    <h1>TH3 API</h1>
+    <p>Live JSON endpoints for TH3Chain network, blocks, transactions, addresses and broadcasting.</p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Status</h2>
+      <div class="rows">
+        <div class="row"><span>API</span><span class="status">Online</span></div>
+        <div class="row"><span>Chain</span><span>TH3</span></div>
+        <div class="row"><span>Height</span><span>${network ? number(network.height) : 'Unavailable'}</span></div>
+        <div class="row"><span>Peers</span><span>${network ? number(network.peers) : 'Unavailable'}</span></div>
+        <div class="row"><span>Difficulty</span><span>${network ? network.difficulty : 'Unavailable'}</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Official Links</h2>
+      <div class="links">
+        <a class="btn btn-main" href="https://th3chain.cloud">Website</a>
+        <a class="btn" href="https://wallet.th3chain.cloud">Wallet</a>
+        <a class="btn" href="https://explorer.th3chain.cloud">Explorer</a>
+        <a class="btn" href="https://pool.th3chain.cloud">Pool</a>
+        <a class="btn" href="https://th3chain.cloud/listing.html">Listing Info</a>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2>Endpoints</h2>
+      <div class="rows">
+        <div class="row"><span>Network</span><span class="code">GET /api/network</span></div>
+        <div class="row"><span>Latest blocks</span><span class="code">GET /api/latest-blocks</span></div>
+        <div class="row"><span>Block height</span><span class="code">GET /api/block-height/:height</span></div>
+        <div class="row"><span>Block hash</span><span class="code">GET /api/block/:hash</span></div>
+        <div class="row"><span>Transaction</span><span class="code">GET /api/tx/:txid</span></div>
+        <div class="row"><span>Address</span><span class="code">GET /api/address/:address</span></div>
+        <div class="row"><span>History</span><span class="code">GET /api/address/:address/history</span></div>
+        <div class="row"><span>UTXOs</span><span class="code">GET /api/address/:address/utxos</span></div>
+        <div class="row"><span>Broadcast</span><span class="code">POST /api/broadcast</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>`);
+});
+
+
 // Network info
 app.get('/api/network', (req, res) => {
   try {
