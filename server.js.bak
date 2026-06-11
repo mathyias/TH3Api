@@ -1,0 +1,41 @@
+const express = require('express');
+const { execSync } = require('child_process');
+
+const app = express();
+const PORT = 3000;
+
+function rpc(cmd) {
+    try {
+        return execSync(`/home/ubuntu/TH3Coin/src/raven-cli ${cmd}`)
+            .toString()
+            .trim();
+    } catch (err) {
+        return null;
+    }
+}
+
+app.get('/api/network', (req, res) => {
+    try {
+        const height = parseInt(rpc('getblockcount'));
+        const peers = parseInt(rpc('getconnectioncount'));
+        const difficulty = parseFloat(rpc('getdifficulty'));
+        const bestblock = rpc('getbestblockhash');
+
+        res.json({
+            chain: 'TH3',
+            version: '1.0.0',
+            height,
+            peers,
+            difficulty,
+            bestblock
+        });
+    } catch (e) {
+        res.status(500).json({
+            error: e.toString()
+        });
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`TH3 Explorer API running on port ${PORT}`);
+});
