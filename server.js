@@ -211,6 +211,43 @@ h2{
   .grid{grid-template-columns:1fr}
   .row{grid-template-columns:1fr}
 }
+
+.social-strip {
+  width: min(720px, calc(100% - 36px));
+  margin: 42px auto 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.social-strip a {
+  min-height: 40px;
+  padding: 9px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, .68);
+  color: #f8fafc;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.social-strip span {
+  width: 24px;
+  height: 24px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #4eeaff;
+  color: #020617;
+  font-size: 11px;
+  font-weight: 950;
+}
+
 </style>
 </head>
 <body>
@@ -263,6 +300,13 @@ h2{
     </div>
   </section>
 </div>
+
+<section class="social-strip" aria-label="TH3Chain social links">
+  <a href="https://x.com/TH3ChainCloud" target="_blank" rel="noreferrer"><span>X</span>X / Twitter</a>
+  <a href="https://t.me/TH3ChainCloud" target="_blank" rel="noreferrer"><span>TG</span>Telegram</a>
+  <a href="mailto:contact@th3chain.cloud"><span>@</span>Contact</a>
+</section>
+
 </body>
 </html>`);
 });
