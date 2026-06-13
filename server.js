@@ -58,6 +58,46 @@ function isTH3Address(address) {
   return typeof address === 'string' && /^TH3[1-9A-HJ-NP-Za-km-z]{25,60}$/.test(address);
 }
 
+
+const BLOCK_REWARD_TH3 = 2137;
+const HALVING_INTERVAL = 2100000;
+const MAX_SUPPLY_TH3 = 8975400000;
+
+function formatSupplyNumber(value) {
+  return Number(value || 0).toFixed(8);
+}
+
+function calculateTotalSupply(height) {
+  let remainingBlocks = Math.max(Number(height || 0), 0);
+  let reward = BLOCK_REWARD_TH3;
+  let total = 0;
+
+  while (remainingBlocks > 0 && reward > 0) {
+    const blocksAtReward = Math.min(remainingBlocks, HALVING_INTERVAL);
+    total += blocksAtReward * reward;
+    remainingBlocks -= blocksAtReward;
+    reward = reward / 2;
+  }
+
+  return total;
+}
+
+function getSupplyInfo() {
+  const height = parseInt(rpc('getblockcount'));
+  const totalSupply = calculateTotalSupply(height);
+
+  return {
+    chain: 'TH3',
+    ticker: 'TH3',
+    height,
+    totalSupply,
+    circulatingSupply: totalSupply,
+    maxSupply: MAX_SUPPLY_TH3,
+    blockReward: BLOCK_REWARD_TH3,
+    halvingInterval: HALVING_INTERVAL
+  };
+}
+
 function isHex(value) {
   return typeof value === 'string' && /^[0-9a-fA-F]+$/.test(value);
 }
@@ -311,6 +351,47 @@ h2{
 </html>`);
 });
 
+
+
+// Supply info
+app.get('/api/supply', (req, res) => {
+  try {
+    const supply = getSupplyInfo();
+
+    res.json({
+      ...supply,
+      totalSupplyFormatted: formatSupplyNumber(supply.totalSupply),
+      circulatingSupplyFormatted: formatSupplyNumber(supply.circulatingSupply),
+      maxSupplyFormatted: formatSupplyNumber(supply.maxSupply)
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.get('/api/supply/circulating', (req, res) => {
+  try {
+    res.type('text/plain').send(formatSupplyNumber(getSupplyInfo().circulatingSupply));
+  } catch (e) {
+    res.status(500).type('text/plain').send(e.message);
+  }
+});
+
+app.get('/api/supply/total', (req, res) => {
+  try {
+    res.type('text/plain').send(formatSupplyNumber(getSupplyInfo().totalSupply));
+  } catch (e) {
+    res.status(500).type('text/plain').send(e.message);
+  }
+});
+
+app.get('/api/supply/max', (req, res) => {
+  try {
+    res.type('text/plain').send(formatSupplyNumber(MAX_SUPPLY_TH3));
+  } catch (e) {
+    res.status(500).type('text/plain').send(e.message);
+  }
+});
 
 // Network info
 app.get('/api/network', (req, res) => {
