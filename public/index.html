@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05090c">
+<title>TH3 API | Live Network</title>
+<link rel="icon" type="image/png" href="https://th3chain.cloud/favicon.png">
+<link rel="apple-touch-icon" href="https://th3chain.cloud/apple-touch-icon.png">
+<meta property="og:title" content="TH3 API">
+<meta property="og:image" content="https://th3chain.cloud/assets/th3-logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TH3 API">
+<meta name="twitter:image" content="https://th3chain.cloud/assets/th3-logo.png">
+<link rel="stylesheet" href="/style.css?v=20260621-api-maincopy">
+</head>
+<body>
+<main class="phone">
+  <header class="topbar">
+    <a class="top-action" href="https://th3chain.cloud" aria-label="TH3Chain home">+</a>
+    <h1>TH3Chain</h1>
+    <a href="https://th3chain.cloud" class="brand-mark" aria-label="TH3Chain home">
+      <img src="https://th3chain.cloud/assets/th3-logo.png" alt="TH3">
+    </a>
+  </header>
+
+  <nav class="stories" aria-label="TH3Chain links">
+    <a class="story" href="https://wallet.th3chain.cloud">
+      <span class="story-ring"><img src="https://th3chain.cloud/assets/th3-logo.png" alt=""></span>
+      <strong>Wallet</strong>
+    </a>
+    <a class="story" href="https://explorer.th3chain.cloud">
+      <span class="story-ring" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false"><path d="M24 9 39 24 24 39 9 24 24 9Z" fill="#f8fbff"/><path d="M20 28 26 17l4 4-6 11-4-4Z" fill="#05090c"/></svg>
+      </span>
+      <strong>Explorer</strong>
+    </a>
+    <a class="story" href="https://chromewebstore.google.com/detail/th3-wallet/kngpfocihoddeicehgikkgjbpkfnpial" target="_blank" rel="noreferrer">
+      <span class="story-ring" aria-hidden="true">C</span>
+      <strong>Chrome</strong>
+    </a>
+    <a class="story" href="https://coinranking.com/coin/jFx1j88Fo+th3chain-th3" target="_blank" rel="noreferrer">
+      <span class="story-ring" aria-hidden="true">CR</span>
+      <strong>CoinRanking</strong>
+    </a>
+    <a class="story" href="https://www.livecoinwatch.com/price/TH3Chain-TH3" target="_blank" rel="noreferrer">
+      <span class="story-ring livecoinwatch-ring" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="19" fill="#111827"/><circle cx="24" cy="24" r="13" fill="none" stroke="#47d1d9" stroke-width="4"/><path d="M24 12v12l8 5" fill="none" stroke="#f8fbff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 32h5l4-7 4 4 7-11" fill="none" stroke="#efd89a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <strong>LiveCoinWatch</strong>
+    </a>
+    <a class="story" href="https://api.th3chain.cloud/">
+      <span class="story-ring">API</span>
+      <strong>API</strong>
+    </a>
+    <a class="story" href="https://pool.th3chain.cloud">
+      <span class="story-ring">KP</span>
+      <strong>Mining</strong>
+    </a>
+    <a class="story" href="https://th3chain.cloud/whitepaper.html">
+      <span class="story-ring">WP</span>
+      <strong>Paper</strong>
+    </a>
+  </nav>
+
+  <section class="feed">
+    <div class="post-head">
+      <img class="avatar" src="https://th3chain.cloud/assets/th3-logo.png" alt="">
+      <div>
+        <strong>api.th3chain.cloud</strong>
+        <span>public JSON access</span>
+      </div>
+      <div class="dots">...</div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-card api-hero-card">
+        <span class="badge">PUBLIC API</span>
+        <div>
+          <h2>TH3<br>API</h2>
+          <p>Live network, supply, blocks, transactions, address history and broadcast endpoints for TH3Chain.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <a class="button primary" href="/api/network">Network JSON</a>
+      <a class="button" href="/api/supply">Supply JSON</a>
+    </div>
+
+    <section class="stack api-stack" id="api">
+      <article class="card card-inner full">
+        <div class="card-title">
+          <strong>API Status</strong>
+          <span id="apiStatus">Checking</span>
+        </div>
+        <div class="live-grid">
+          <div class="stat"><span>Chain</span><strong class="live-value">TH3</strong></div>
+          <div class="stat"><span>Height</span><strong class="live-value" id="height">-</strong></div>
+          <div class="stat"><span>Peers</span><strong class="live-value" id="peers">-</strong></div>
+          <div class="stat"><span>Hashrate</span><strong class="live-value" id="hashrate">-</strong></div>
+        </div>
+      </article>
+
+      <article class="card card-inner third">
+        <div class="card-title">
+          <strong>Official Links</strong>
+          <span>TH3Chain</span>
+        </div>
+        <div class="rows">
+          <a class="row" href="https://th3chain.cloud"><span>Website</span><strong>th3chain.cloud</strong></a>
+          <a class="row" href="https://wallet.th3chain.cloud"><span>Wallet</span><strong>wallet.th3chain.cloud</strong></a>
+          <a class="row" href="https://explorer.th3chain.cloud"><span>Explorer</span><strong>explorer.th3chain.cloud</strong></a>
+          <a class="row" href="https://pool.th3chain.cloud"><span>Pool</span><strong>pool.th3chain.cloud</strong></a>
+        </div>
+      </article>
+
+      <article class="card card-inner two-third">
+        <div class="card-title">
+          <strong>Network Snapshot</strong>
+          <span>Live API</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span>Difficulty</span><strong class="code" id="difficulty">-</strong></div>
+          <div class="row"><span>Best block</span><strong class="code" id="bestblock">-</strong></div>
+          <div class="row"><span>Version</span><strong class="code" id="version">-</strong></div>
+        </div>
+      </article>
+
+      <article class="card card-inner full api-endpoints-card">
+        <div class="card-title">
+          <strong>Endpoints</strong>
+          <span>JSON</span>
+        </div>
+        <div class="api-endpoints">
+          <a class="row" href="/api/network"><span>Network</span><strong class="code">GET /api/network</strong></a>
+          <a class="row" href="/api/supply"><span>Supply</span><strong class="code">GET /api/supply</strong></a>
+          <a class="row" href="/api/latest-blocks"><span>Latest blocks</span><strong class="code">GET /api/latest-blocks</strong></a>
+          <div class="row"><span>Block height</span><strong class="code">GET /api/block-height/:height</strong></div>
+          <div class="row"><span>Block hash</span><strong class="code">GET /api/block/:hash</strong></div>
+          <div class="row"><span>Transaction</span><strong class="code">GET /api/tx/:txid</strong></div>
+          <div class="row"><span>Address</span><strong class="code">GET /api/address/:address</strong></div>
+          <div class="row"><span>History</span><strong class="code">GET /api/address/:address/history</strong></div>
+          <div class="row"><span>UTXOs</span><strong class="code">GET /api/address/:address/utxos</strong></div>
+          <div class="row"><span>Broadcast</span><strong class="code">POST /api/broadcast</strong></div>
+        </div>
+      </article>
+
+      <footer class="powered-footer">
+        <span>Powered by <strong>TH3Chain</strong></span>
+        <span>Network · Blocks · Addresses · Broadcast</span>
+      </footer>
+    </section>
+  </section>
+
+  <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false">Menu</button>
+  <nav class="dock nav-links" id="navLinks" aria-label="Main navigation">
+    <a href="https://th3chain.cloud" aria-label="Home">⌂</a>
+    <a href="https://wallet.th3chain.cloud" aria-label="Wallet">▣</a>
+    <a href="https://explorer.th3chain.cloud" aria-label="Explorer">⌕</a>
+    <a href="https://pool.th3chain.cloud" aria-label="Mining">↯</a>
+    <a href="https://t.me/TH3ChainCloud" target="_blank" rel="noreferrer" aria-label="Telegram">◎</a>
+  </nav>
+
+  <aside class="social-rail" aria-label="TH3 social links">
+    <a class="rail-link" href="https://th3chain.cloud" target="_blank" rel="noreferrer" aria-label="Main page"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3.2 3 10.6l1.28 1.54L5.5 11.13V20h5.25v-5.5h2.5V20h5.25v-8.87l1.22 1.01L21 10.6 12 3.2Zm4.5 14.8h-1.25v-5.5h-6.5V18H7.5v-8.52L12 5.78l4.5 3.7V18Z"/></svg></span><span class="rail-label">Main Page</span></a>
+    <a class="rail-link" href="https://x.com/TH3ChainCloud" target="_blank" rel="noreferrer" aria-label="Twitter"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M17.53 3h3.02l-6.6 7.55L21.7 21h-6.08l-4.76-6.22L5.42 21H2.38l7.06-8.07L2 3h6.23l4.3 5.69L17.53 3Zm-1.06 16.16h1.67L7.32 4.74H5.53l10.94 14.42Z"/></svg></span><span class="rail-label">Twitter</span></a>
+    <a class="rail-link" href="https://chromewebstore.google.com/detail/th3-wallet/kngpfocihoddeicehgikkgjbpkfnpial" target="_blank" rel="noreferrer" aria-label="Chrome"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 2a10 10 0 0 1 8.66 5H12a5 5 0 0 0-4.33 2.5L4.3 3.66A9.96 9.96 0 0 1 12 2Zm0 20a10 10 0 0 1-8.66-15l4.33 7.5A5 5 0 0 0 12 17h6.74A9.98 9.98 0 0 1 12 22Zm8.66-13A10 10 0 0 1 20 18h-8a5 5 0 0 0 4.33-7.5L15.46 9h5.2ZM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/></svg></span><span class="rail-label">Chrome</span></a>
+    <a class="rail-link" href="https://t.me/TH3ChainCloud" target="_blank" rel="noreferrer" aria-label="Telegram"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M21.78 4.36 18.5 19.82c-.25 1.1-.9 1.36-1.82.85l-5.02-3.7-2.42 2.33c-.27.27-.5.5-1.03.5l.37-5.1 9.28-8.39c.4-.36-.09-.56-.62-.2L5.77 13.34.83 11.8c-1.07-.34-1.09-1.07.22-1.58L20.4 2.76c.9-.33 1.68.2 1.38 1.6Z"/></svg></span><span class="rail-label">Telegram</span></a>
+    <a class="rail-link" href="mailto:contact@th3chain.cloud" aria-label="Contact"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4.5 5.5h15A2.5 2.5 0 0 1 22 8v8a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 16V8a2.5 2.5 0 0 1 2.5-2.5Zm0 2 7.5 5.05L19.5 7.5h-15Zm15 9A.5.5 0 0 0 20 16V9.28l-7.44 5.02a1 1 0 0 1-1.12 0L4 9.28V16a.5.5 0 0 0 .5.5h15Z"/></svg></span><span class="rail-label">Contact</span></a>
+  </aside>
+</main>
+
+<script src="/app.js?v=20260621-api-maincopy"></script>
+</body>
+</html>
